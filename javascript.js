@@ -1,3 +1,5 @@
+// testing 1234 testing 1234
+
 const options = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
