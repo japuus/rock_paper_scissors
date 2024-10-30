@@ -1,5 +1,4 @@
-// testing 1234 testing 1234
-
+// funktio jolla tietokone valitsee kiven, saksen tai paperin.
 const options = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
@@ -7,52 +6,62 @@ function getComputerChoice() {
     return options[random];
     }
 
+
 let playerScore = 0;
+const playerScoreText = document.querySelector("#playerScore");
+
 let computerScore = 0;
+const computerScoreText = document.querySelector("#computerScore");
 
-let round = 1;
-function playRound() {
-    let start = window.prompt("Round " + round + ".\nYour score is "
-        + playerScore  +". Computer score is " + computerScore + ".\nWhich option do you pick?");
+const buttonRock = document.querySelector(".rock");
+const buttonPaper = document.querySelector(".paper");
+const buttonScissors = document.querySelector(".scissors");
 
-    let playerChoice = start.toLowerCase();
+buttonRock.addEventListener("click", playRoundRock);
+buttonPaper.addEventListener("click", playRoundPaper);
+buttonScissors.addEventListener("click", playRoundScissors);
+
+function playRoundRock() {
     let computerChoice = getComputerChoice();
-    if ((playerChoice == "rock" && computerChoice == "scissors") ||
-    (playerChoice == "paper" && computerChoice == "rock") ||
-    (playerChoice == "scissors" && computerChoice == "paper")) {
+    if (computerChoice == "rock") {
+        window.alert(`It's a tie. Computer chose ${computerChoice}`);  
+    } else if (computerChoice == "paper") {
+        window.alert(`You lose. Computer chose ${computerChoice}`);
+        computerScore += 1;
+        computerScoreText.textContent = `Tietokoneen score on ${computerScore}`;
+    } else if (computerChoice == "scissors") {
+        window.alert(`You win. Computer chose ${computerChoice}`)
         playerScore += 1;
-        window.alert(`You chose ${playerChoice}, computer chose ${computerChoice}. You win this round.`)
-        console.log(`You chose ${playerChoice}, computer chose ${computerChoice}. You win this round.`)
-        round += 1;
-    } else if ((playerChoice == "rock" && computerChoice == "rock") ||
-    (playerChoice == "paper" && computerChoice == "paper")||
-    (playerChoice == "scissors" && computerChoice == "scissors")) {
-    window.alert(`You chose ${playerChoice}, computer chose ${computerChoice}. It is a tie.`)
-    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}. It is a tie.`)
-    playRound();
-    } else if (!(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")) {
-    window.alert("Choose either rock, paper or scissors");
-    playRound();
-    }  else {
-    computerScore += 1;
-    window.alert(`You chose ${playerChoice}, computer chose ${computerChoice}. You lose this round.`)
-    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}. You lose this round.`)
-    round += 1; }
-    }
-
-function game() {
-    console.log("This is a game of rock, paper, scissors.");
-    window.alert("This is a game of rock, paper, scissors.");
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
-    if (playerScore > computerScore) {
-        window.alert("You won the game! Your score is " + playerScore + ". Computer score is " + computerScore + ".");
-        console.log("You won the game! Your score is " + playerScore + ". Computer score is " + computerScore + ".");
-    } else {
-        window.alert("You lost the game. Your score is " + playerScore + ". Computer score is " + computerScore + ".")
-        console.log("You lost the game. Your score is " + playerScore + ". Computer score is " + computerScore + ".");
+        playerScoreText.textContent = `Pelaajan score on ${playerScore}`;
     }
 }
 
-game();
+function playRoundPaper() {
+    let computerChoice = getComputerChoice();
+    if (computerChoice == "paper") {
+        window.alert(`It's a tie. Computer chose ${computerChoice}`);  
+    } else if (computerChoice == "scissors") {
+        window.alert(`You lose. Computer chose ${computerChoice}`);
+        computerScore += 1;
+        computerScoreText.textContent = `Tietokoneen score on ${computerScore}`;
+    } else if (computerChoice == "rock") {
+        window.alert(`You win. Computer chose ${computerChoice}`)
+        playerScore += 1;
+        playerScoreText.textContent = `Pelaajan score on ${playerScore}`;
+    }
+}
+
+function playRoundScissors() {
+    let computerChoice = getComputerChoice();
+    if (computerChoice == "scissors") {
+        window.alert(`It's a tie. Computer chose ${computerChoice}`);  
+    } else if (computerChoice == "rock") {
+        window.alert(`You lose. Computer chose ${computerChoice}`);
+        computerScore += 1;
+        computerScoreText.textContent = `Tietokoneen score on ${computerScore}`;
+    } else if (computerChoice == "paper") {
+        window.alert(`You win. Computer chose ${computerChoice}`)
+        playerScore += 1;
+        playerScoreText.textContent = `Pelaajan score on ${playerScore}`;
+    }
+}
